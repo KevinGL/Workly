@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter plusieurs sociétés{% endblock %}
+
+{% block body %}
+
+<div>
+    <h1>Ajouter plusieurs sociétés</h1>
+
+    {{ form(form) }}
+    
+    <a href="{{ url('app_society') }}">Revenir à la liste</a>
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter une société{% endblock %}
+
+{% block body %}
+
+<div>
+    <h1>Ajouter une société</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.name) }}
+        {{ form_row(form.contactedAt) }}
+        {{ form_row(form.toRelaunchAt) }}
+        {{ form_row(form.relaunchedAt) }}
+        {{ form_row(form.phoneNumber) }}
+        {{ form_row(form.recruit) }}
+        {{ form_row(form.about) }}
+        {{ form_row(form.answer) }}
+
+        <input type="submit" />
+    {{ form_end(form) }}
+    
+    <a href="{{ url('app_society') }}">Revenir à la liste</a>
+</div>
+{% endblock %}

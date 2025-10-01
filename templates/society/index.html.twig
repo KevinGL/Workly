@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des sociétés{% endblock %}
+
+{% block body %}
+
+<div>
+    <h1>Liste des sociétés</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Contactée le</th>
+                <th>À relancer le</th>
+                <th>Relancée le</th>
+                <th>Numéro de téléphone</th>
+                <th>Recrute ?</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for society in societies %}
+                <tr>
+                    <td>{{ society.name }}</td>
+                    <td>{{ society.contactedAt ? society.contactedAt | date("d/m/Y") : "N/A" }}</td>
+                    <td>{{ society.toRelaunchAt ? society.toRelaunchAt | date("d/m/Y") : "N/A" }}</td>
+                    <td>{{ society.relaunchedAt ? society.relaunchedAt | date("d/m/Y") : "N/A" }}</td>
+                    <td>{{ society.phoneNumber }}</td>
+                    <td>{{ society.recruit }}</td>
+                    <td><a href="{{ url('view_society', {'id': society.id}) }}">Voir</a> <a href="{{ url('edit_society', {'id': society.id}) }}">Modifier</a> <button id="{{ society.id }}" class="delete">Supprimer</button></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ url('add_society') }}">Ajouter une société</a>
+    <div>
+        <h4>Ajouter plusieurs sociétés</h4>
+
+        Nombre : <input type="number" min="2" id="number" value="2" />
+        <button id="add_several">Valider</button>
+    </div>
+</div>
+
+<div id="modal" hidden>
+    <div>Confirmer la suppression ?</div>
+    <div>
+        <button id="delete_yes">Oui</button>
+        <button id="delete_no">Non</button>
+    </div>
+</div>
+
+<script>
+    document.getElementById("add_several").addEventListener("click", () =>
+    {
+        window.location.href = "/society/add_several/" + document.getElementById("number").value;
+    });
+
+    const deletes = Array.from(document.getElementsByClassName("delete"));
+    const modal = document.getElementById("modal");
+    let idDelete = "";
+    
+    deletes.map((d) =>
+    {
+        d.addEventListener("click", () =>
+        {
+            idDelete = d.id;
+            modal.hidden = false;
+        });
+    });
+
+    document.getElementById("delete_yes").addEventListener("click", () =>
+    {
+        window.location.href = "/society/delete/" + idDelete;
+    });
+
+    document.getElementById("delete_no").addEventListener("click", () =>
+    {
+        modal.hidden = true;
+    });
+</script>
+{% endblock %}

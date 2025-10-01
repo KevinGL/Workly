@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Société {{ society.name }}{% endblock %}
+
+{% block body %}
+
+<div>
+    <h1>Société {{ society.name }}</h1>
+
+    <div>Contactée le {{ society.contactedAt ? society.contactedAt | date("d/m/Y") : "N/A" }}</div>
+    <div>À relancer le {{ society.toRelaunchAt ? society.toRelaunchAt | date("d/m/Y") : "N/A" }}</div>
+    <div>Relancée le {{ society.relaunchedAt ? society.relaunchedAt | date("d/m/Y") : "N/A" }}</div>
+    <div>Numéro : {{ society.phoneNumber }}</div>
+    <p>Infos supplémentaires : {{ society.about }}</p>
+    <div>Recrute ? {{ society.recruit }}</div>
+    <p>Bilan échange : {{ society.answer }}</p>
+    
+    <a href="{{ url('app_society') }}">Revenir à la liste</a>
+</div>
+{% endblock %}
