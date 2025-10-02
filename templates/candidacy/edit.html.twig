@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}AMettre à jour une candidature{% endblock %}
+
+{% block body %}
+
+<div>
+    {{ form_start(form) }}
+        {{ form_row(form.job) }}
+        {{ form_row(form.link) }}
+        {{ form_row(form.society) }}
+        {{ form_row(form.location) }}
+        {{ form_row(form.about) }}
+        {{ form_row(form.appliedAt) }}
+        {{ form_row(form.toRelaunchAt) }}
+        {{ form_row(form.relaunchedAt) }}
+        {{ form_row(form.answer) }}
+
+        <input type="submit" />
+    {{ form_end(form) }}
+
+    <a href="{{ url('app_candidacy') }}">Revenir à la liste</a>
+</div>
+
+{% endblock %}

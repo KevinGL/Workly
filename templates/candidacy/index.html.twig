@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Candidatures offres d'emploi{% endblock %}
+
+{% block body %}
+
+<div>
+    <h1>Candidatures offres d'emploi</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Poste</th>
+                <th>Offre d'emploi</th>
+                <th>Société</th>
+                <th>Postulé le</th>
+                <th>À relancer le</th>
+                <th>Relancée le</th>
+                <th>Réponse</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for cand in candidacies %}
+                <tr>
+                    <td>{{ cand.job }}</td>
+                    <td>{{ cand.link }}</td>
+                    <td>{{ cand.society }}</td>
+                    <td>{{ cand.appliedAt ? cand.appliedAt | date("d/m/Y") : "N/A" }}</td>
+                    <td>{{ cand.toRelaunchAt ? cand.toRelaunchAt | date("d/m/Y") : "N/A" }}</td>
+                    <td>{{ cand.relaunchedAt ? cand.relaunchedAt | date("d/m/Y") : "N/A" }}</td>
+                    <td>{{ cand.answer }}</td>
+                    <td><a href="{{ url('view_candidacy', {'id': cand.id}) }}">Voir</a> <a href="{{ url('edit_candidacy', {'id': cand.id}) }}">Modifier</a> <button id="{{ cand.id }}" class="delete">Supprimer</button></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ url('add_candidacy') }}">Ajouter une candidature</a>
+
+    <div>
+        <h4>Ajouter plusieurs candidatures</h4>
+
+        Nombre : <input type="number" min="2" id="number" value="2" />
+        <button id="add_several">Valider</button>
+    </div>
+</div>
+
+<div id="modal" hidden>
+    <div>Confirmer la suppression ?</div>
+    <div>
+        <button id="delete_yes">Oui</button>
+        <button id="delete_no">Non</button>
+    </div>
+</div>
+
+<script>
+    document.getElementById("add_several").addEventListener("click", () =>
+    {
+        window.location.href = "/candidacy/add_several/" + document.getElementById("number").value;
+    });
+
+    const deletes = Array.from(document.getElementsByClassName("delete"));
+    const modal = document.getElementById("modal");
+    let idDelete = "";
+    
+    deletes.map((d) =>
+    {
+        d.addEventListener("click", () =>
+        {
+            idDelete = d.id;
+            modal.hidden = false;
+        });
+    });
+
+    document.getElementById("delete_yes").addEventListener("click", () =>
+    {
+        window.location.href = "/candidacy/delete/" + idDelete;
+    });
+
+    document.getElementById("delete_no").addEventListener("click", () =>
+    {
+        modal.hidden = true;
+    });
+</script>
+{% endblock %}

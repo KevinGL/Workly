@@ -38,6 +38,12 @@ class Society
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $answer = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $Email = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $LinkedIn = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -135,6 +141,30 @@ class Society
     public function setAnswer(?string $answer): static
     {
         $this->answer = $answer;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->Email;
+    }
+
+    public function setEmail(?string $Email): static
+    {
+        $this->Email = $Email;
+
+        return $this;
+    }
+
+    public function getLinkedIn(): ?string
+    {
+        return $this->LinkedIn;
+    }
+
+    public function setLinkedIn(?string $LinkedIn): static
+    {
+        $this->LinkedIn = $LinkedIn;
 
         return $this;
     }

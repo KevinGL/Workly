@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Candidature{% endblock %}
+
+{% block body %}
+
+<div>
+    <h1>Candidature</h1>
+
+    <div>Postulé le {{ candidacy.appliedAt ? candidacy.appliedAt | date("d/m/Y") : "N/A" }}</div>
+    <div>À relancer le {{ candidacy.toRelaunchAt ? candidacy.toRelaunchAt | date("d/m/Y") : "N/A" }}</div>
+    <div>Relancée le {{ candidacy.relaunchedAt ? candidacy.relaunchedAt | date("d/m/Y") : "N/A" }}</div>
+    <div>Poste proposé : {{ candidacy.job }}</div>
+    <div>Lien offre : {{ candidacy.link }}</div>
+    <div>Société : {{ candidacy.society }}</div>
+    <div>Localisation : {{ candidacy.location }}</div>
+    <p>Infos supplémentaires : {{ candidacy.about }}</p>
+    <div>Réponse : {{ candidacy.answer }}</div>
+    
+    <a href="{{ url('app_candidacy') }}">Revenir à la liste</a>
+</div>
+{% endblock %}

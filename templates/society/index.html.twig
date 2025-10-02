@@ -15,6 +15,8 @@
                 <th>À relancer le</th>
                 <th>Relancée le</th>
                 <th>Numéro de téléphone</th>
+                <th>Adresse email</th>
+                <th>Lien LinkedIn</th>
                 <th>Recrute ?</th>
                 <th>Action</th>
             </tr>
@@ -28,6 +30,8 @@
                     <td>{{ society.toRelaunchAt ? society.toRelaunchAt | date("d/m/Y") : "N/A" }}</td>
                     <td>{{ society.relaunchedAt ? society.relaunchedAt | date("d/m/Y") : "N/A" }}</td>
                     <td>{{ society.phoneNumber }}</td>
+                    <td>{{ society.email ? society.email : "N/A" }}</td>
+                    <td>{{ society.linkedIn ? society.linkedIn : "N/A" }}</td>
                     <td>{{ society.recruit }}</td>
                     <td><a href="{{ url('view_society', {'id': society.id}) }}">Voir</a> <a href="{{ url('edit_society', {'id': society.id}) }}">Modifier</a> <button id="{{ society.id }}" class="delete">Supprimer</button></td>
                 </tr>

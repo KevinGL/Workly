@@ -21,6 +21,8 @@ class SocietyType extends AbstractType
             ->add("toRelaunchAt", DateType::class, ["label" => "À relancer le", "required" => false])
             ->add("relaunchedAt", DateType::class, ["label" => "Relancée le", "required" => false])
             ->add('phoneNumber', TextType::class, ["label" => "Numéro"])
+            ->add('email', TextType::class, ["label" => "Adresse email"])
+            ->add('linkedIn', TextType::class, ["label" => "Lien LinkedIn"])
             ->add('recruit', ChoiceType::class,
             [
                 "label" => "Recrute ?",
