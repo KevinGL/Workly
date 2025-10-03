@@ -30,7 +30,7 @@
                     <td>{{ cand.appliedAt ? cand.appliedAt | date("d/m/Y") : "N/A" }}</td>
                     <td>{{ cand.toRelaunchAt ? cand.toRelaunchAt | date("d/m/Y") : "N/A" }}</td>
                     <td>{{ cand.relaunchedAt ? cand.relaunchedAt | date("d/m/Y") : "N/A" }}</td>
-                    <td>{{ cand.answer }}</td>
+                    <td>{{ cand.answer ?? "N/A" }}</td>
                     <td><a href="{{ url('view_candidacy', {'id': cand.id}) }}">Voir</a> <a href="{{ url('edit_candidacy', {'id': cand.id}) }}">Modifier</a> <button id="{{ cand.id }}" class="delete">Supprimer</button></td>
                 </tr>
             {% endfor %}

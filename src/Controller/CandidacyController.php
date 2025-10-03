@@ -11,12 +11,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\SecurityRequestAttributes;
 
 final class CandidacyController extends AbstractController
 {
     #[Route('/candidacy', name: 'app_candidacy')]
-    public function index(CandidacyRepository $repo): Response
+    public function index(Request $req, CandidacyRepository $repo): Response
     {
+        if(!$req->getSession()->get("is_authenticated"))
+        {
+            return $this->redirectToRoute("app_home");
+        }
+        
         $candidacies = $repo->findAll();
         
         return $this->render('candidacy/index.html.twig',
@@ -28,6 +34,11 @@ final class CandidacyController extends AbstractController
     #[Route("/candidacy/add", name: "add_candidacy")]
     public function add(Request $req, EntityManagerInterface $em): Response
     {
+        if(!$req->getSession()->get("is_authenticated"))
+        {
+            return $this->redirectToRoute("app_home");
+        }
+        
         $candidacy = new Candidacy();
 
         $candidacy->setAppliedAt(new \DateTime());
@@ -53,6 +64,11 @@ final class CandidacyController extends AbstractController
     #[Route("/candidacy/add_several/{number}", name: "add_several_candidacy")]
     public function addSeveral(Request $req, int $number, EntityManagerInterface $em): Response
     {
+        if(!$req->getSession()->get("is_authenticated"))
+        {
+            return $this->redirectToRoute("app_home");
+        }
+        
         $candidacies = [];
 
         for($i = 0 ; $i < $number ; $i++)
@@ -85,6 +101,11 @@ final class CandidacyController extends AbstractController
     #[Route("/candidacy/edit/{id}", name: "edit_candidacy")]
     public function edit(Request $req, CandidacyRepository $repo, int $id, EntityManagerInterface $em): Response
     {
+        if(!$req->getSession()->get("is_authenticated"))
+        {
+            return $this->redirectToRoute("app_home");
+        }
+        
         $candidacy = $repo->find($id);
 
         $form = $this->createForm(CandidacyType::class, $candidacy);
@@ -106,8 +127,13 @@ final class CandidacyController extends AbstractController
     }
 
     #[Route("/candidacy/view/{id}", name: "view_candidacy")]
-    public function view(CandidacyRepository $repo, int $id): Response
+    public function view(Request $req, CandidacyRepository $repo, int $id): Response
     {
+        if(!$req->getSession()->get("is_authenticated"))
+        {
+            return $this->redirectToRoute("app_home");
+        }
+        
         $candidacy = $repo->find($id);
         
         return $this->render('candidacy/view.html.twig',
@@ -117,8 +143,13 @@ final class CandidacyController extends AbstractController
     }
 
     #[Route("/candidacy/delete/{id}", name: "delete_candidacy")]
-    public function delete(CandidacyRepository $repo, int $id, EntityManagerInterface $em): Response
+    public function delete(Request $req,CandidacyRepository $repo, int $id, EntityManagerInterface $em): Response
     {
+        if(!$req->getSession()->get("is_authenticated"))
+        {
+            return $this->redirectToRoute("app_home");
+        }
+        
         $candidacy = $repo->find($id);
 
         $em->remove($candidacy);

@@ -15,8 +15,13 @@ use Symfony\Component\Routing\Attribute\Route;
 final class SocietyController extends AbstractController
 {
     #[Route('/society', name: 'app_society')]
-    public function index(SocietyRepository $repo): Response
+    public function index(Request $req, SocietyRepository $repo): Response
     {
+        if(!$req->getSession()->get("is_authenticated"))
+        {
+            return $this->redirectToRoute("app_home");
+        }
+
         $societies = $repo->findAll();
         
         return $this->render('society/index.html.twig',
@@ -28,6 +33,11 @@ final class SocietyController extends AbstractController
     #[Route("/society/add", name: "add_society")]
     public function add(Request $req, EntityManagerInterface $em): Response
     {
+        if(!$req->getSession()->get("is_authenticated"))
+        {
+            return $this->redirectToRoute("app_home");
+        }
+
         $society = new Society();
 
         $form = $this->createForm(SocietyType::class, $society);
@@ -51,6 +61,11 @@ final class SocietyController extends AbstractController
     #[Route("/society/edit/{id}", name: "edit_society")]
     public function edit(Request $req, SocietyRepository $repo, int $id, EntityManagerInterface $em): Response
     {
+        if(!$req->getSession()->get("is_authenticated"))
+        {
+            return $this->redirectToRoute("app_home");
+        }
+
         $society = $repo->find($id);
 
         $form = $this->createForm(SocietyType::class, $society);
@@ -74,6 +89,11 @@ final class SocietyController extends AbstractController
     #[Route("/society/add_several/{number}", name: "add_several_society")]
     public function addSeveral(Request $req, int $number, EntityManagerInterface $em): Response
     {
+        if(!$req->getSession()->get("is_authenticated"))
+        {
+            return $this->redirectToRoute("app_home");
+        }
+
         $societies = [];
 
         for($i = 0 ; $i < $number ; $i++)
@@ -104,8 +124,13 @@ final class SocietyController extends AbstractController
     }
 
     #[Route("/society/view/{id}", name: "view_society")]
-    public function view(SocietyRepository $repo, int $id): Response
+    public function view(Request $req, SocietyRepository $repo, int $id): Response
     {
+        if(!$req->getSession()->get("is_authenticated"))
+        {
+            return $this->redirectToRoute("app_home");
+        }
+
         $society = $repo->find($id);
 
         return $this->render('society/view.html.twig',
@@ -115,8 +140,13 @@ final class SocietyController extends AbstractController
     }
 
     #[Route("/society/delete/{id}", name: "delete_society")]
-    public function delete(SocietyRepository $repo, int $id, EntityManagerInterface $em): Response
+    public function delete(Request $req,SocietyRepository $repo, int $id, EntityManagerInterface $em): Response
     {
+        if(!$req->getSession()->get("is_authenticated"))
+        {
+            return $this->redirectToRoute("app_home");
+        }
+
         $society = $repo->find($id);
 
         $em->remove($society);
