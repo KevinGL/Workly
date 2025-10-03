@@ -19,7 +19,7 @@ final class SocietyController extends AbstractController
     {
         if(!$req->getSession()->get("is_authenticated"))
         {
-            return $this->redirectToRoute("app_home");
+            return $this->redirectToRoute("app_login");
         }
 
         $societies = $repo->findAll();
@@ -35,7 +35,7 @@ final class SocietyController extends AbstractController
     {
         if(!$req->getSession()->get("is_authenticated"))
         {
-            return $this->redirectToRoute("app_home");
+            return $this->redirectToRoute("app_login");
         }
 
         $society = new Society();
@@ -63,7 +63,7 @@ final class SocietyController extends AbstractController
     {
         if(!$req->getSession()->get("is_authenticated"))
         {
-            return $this->redirectToRoute("app_home");
+            return $this->redirectToRoute("app_login");
         }
 
         $society = $repo->find($id);
@@ -91,7 +91,7 @@ final class SocietyController extends AbstractController
     {
         if(!$req->getSession()->get("is_authenticated"))
         {
-            return $this->redirectToRoute("app_home");
+            return $this->redirectToRoute("app_login");
         }
 
         $societies = [];
@@ -128,7 +128,7 @@ final class SocietyController extends AbstractController
     {
         if(!$req->getSession()->get("is_authenticated"))
         {
-            return $this->redirectToRoute("app_home");
+            return $this->redirectToRoute("app_login");
         }
 
         $society = $repo->find($id);
@@ -144,7 +144,7 @@ final class SocietyController extends AbstractController
     {
         if(!$req->getSession()->get("is_authenticated"))
         {
-            return $this->redirectToRoute("app_home");
+            return $this->redirectToRoute("app_login");
         }
 
         $society = $repo->find($id);

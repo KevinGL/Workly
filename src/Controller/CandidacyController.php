@@ -20,7 +20,7 @@ final class CandidacyController extends AbstractController
     {
         if(!$req->getSession()->get("is_authenticated"))
         {
-            return $this->redirectToRoute("app_home");
+            return $this->redirectToRoute("app_login");
         }
         
         $candidacies = $repo->findAll();
@@ -36,7 +36,7 @@ final class CandidacyController extends AbstractController
     {
         if(!$req->getSession()->get("is_authenticated"))
         {
-            return $this->redirectToRoute("app_home");
+            return $this->redirectToRoute("app_login");
         }
         
         $candidacy = new Candidacy();
@@ -66,7 +66,7 @@ final class CandidacyController extends AbstractController
     {
         if(!$req->getSession()->get("is_authenticated"))
         {
-            return $this->redirectToRoute("app_home");
+            return $this->redirectToRoute("app_login");
         }
         
         $candidacies = [];
@@ -103,7 +103,7 @@ final class CandidacyController extends AbstractController
     {
         if(!$req->getSession()->get("is_authenticated"))
         {
-            return $this->redirectToRoute("app_home");
+            return $this->redirectToRoute("app_login");
         }
         
         $candidacy = $repo->find($id);
@@ -131,7 +131,7 @@ final class CandidacyController extends AbstractController
     {
         if(!$req->getSession()->get("is_authenticated"))
         {
-            return $this->redirectToRoute("app_home");
+            return $this->redirectToRoute("app_login");
         }
         
         $candidacy = $repo->find($id);
@@ -147,7 +147,7 @@ final class CandidacyController extends AbstractController
     {
         if(!$req->getSession()->get("is_authenticated"))
         {
-            return $this->redirectToRoute("app_home");
+            return $this->redirectToRoute("app_login");
         }
         
         $candidacy = $repo->find($id);

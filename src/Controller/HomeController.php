@@ -15,34 +15,9 @@ final class HomeController extends AbstractController
     {
         if(!$req->getSession()->get("is_authenticated"))
         {
-            $form = $this->createForm(LoginFormType::class);
-            $form->handleRequest($req);
-
-            if($form->isSubmitted() && $form->isValid())
-            {
-                if(!password_verify($form->getData()["password"], $_ENV["APP_SECRET_PASSWORD"]))
-                {
-                    $this->addFlash("error", "Mauvais mot de passe");
-                }
-
-                else
-                {
-                    $req->getSession()->set("is_authenticated", true);
-                    return $this->redirectToRoute("app_home");
-                }
-            }
-
-            return $this->render('home/login.html.twig', ["form" => $form]);
+            return $this->redirectToRoute("app_login");
         }
         
         return $this->render('home/index.html.twig');
-    }
-
-    #[Route("/logout", name: "app_logout")]
-    public function logout(Request $req): Response
-    {
-        $req->getSession()->set("is_authenticated", false);
-
-        return $this->redirectToRoute("app_home");
     }
 }
