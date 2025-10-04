@@ -6,6 +6,7 @@ use App\Entity\JobInterview;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -20,7 +21,11 @@ class JobInterviewType extends AbstractType
             [
                 "required" => false,
                 "empty_data" => ""
-            ]);
+            ])
+            ->add("address", TextType::class)
+            ->add("zipCode", TextType::class)
+            ->add("city", TextType::class)
+        ;
 
         if($options["edit"])
         {
@@ -31,7 +36,9 @@ class JobInterviewType extends AbstractType
                     "Pas de réponse" => "Pas de réponse",
                     "Refusé" => "Refusé",
                     "Embauché" => "Embauché"
-                ]
+                ],
+                "expanded" => true,
+                "multiple" => false,
             ]);
         }
 

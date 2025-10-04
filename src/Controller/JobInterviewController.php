@@ -70,4 +70,50 @@ final class JobInterviewController extends AbstractController
             "form" => $form
         ]);
     }
+
+    #[Route("/job_interview/view/{id}", name: "view_job_interview")]
+    public function view(JobInterviewRepository $repo, int $id) : Response
+    {
+        $jobInterview = $repo->find($id);
+
+        return $this->render("job_interview/view.html.twig",
+        [
+            "jobInterview" => $jobInterview
+        ]);
+    }
+
+    #[Route("/job_interview/edit/{id}", name: "edit_job_interview")]
+    public function edit(Request $req, CandidacyRepository $repo, int $id, EntityManagerInterface $em): Response
+    {
+        $jobInterview = $repo->find($id);
+
+        $form = $this->createForm(JobInterviewType::class, $jobInterview, ["edit" => true]);
+        $form->handleRequest($req);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $em->persist($jobInterview);
+            $em->flush();
+
+            $this->addFlash("success", "Entretien d'embauche mis à jour");
+            return $this->redirectToRoute("app_job_interview");
+        }
+
+        return $this->render("job_interview/edit.html.twig",
+        [
+            "form" => $form
+        ]);
+    }
+
+    #[Route("/job_interview/delete/{id}", name: "delete_job_interview")]
+    public function delete(JobInterviewRepository $repo, int $id, EntityManagerInterface $em): Response
+    {
+        $jobInterview = $repo->find($id);
+
+        $em->remove($jobInterview);
+        $em->flush();
+
+        $this->addFlash("success", "Entretien supprimé");
+        return $this->redirectToRoute("app_job_interview");
+    }
 }

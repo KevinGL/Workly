@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ajouter un entretien d'embauche{% endblock %}
+{% block title %}Modifier un entretien d'embauche{% endblock %}
 
 {% block body %}
 
 <div>
-    <h1>Ajouter un entretien d'embauche</h1>
+    <h1>Modifier un entretien d'embauche</h1>
 
     {{ form_start(form) }}
         {{ form_row(form.job) }}
@@ -19,6 +19,7 @@
         {{ form_row(form.address) }}
         {{ form_row(form.zipCode) }}
         {{ form_row(form.city) }}
+        {{ form_row(form.answer) }}
 
         <input type="submit" />
     {{ form_end(form) }}

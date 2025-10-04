@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Entretien prévu le {{ jobInterview.date | date("d/m/Y") }}{% endblock %}
+
+{% block body %}
+
+<div>
+    <h1>Entretien prévu le {{ jobInterview.date | date("d/m/Y") }}</h1>
+
+    <div>Poste recherché : {{ jobInterview.job }}</div>
+    <div>Société : {{ jobInterview.society }}</div>
+    <div>Type de candidature : {{ jobInterview.candidacyType }}</div>
+    <div>Prévu le {{ jobInterview.date | date("d/m/Y") }} à {{ jobInterview.date | date("H:i") }}</div>
+    <div>Adresse : {{ jobInterview.address }} {{ jobInterview.zipCode }} {{ jobInterview.city }}</div>
+    <div>Numéro : {{ jobInterview.phoneNumber ?? "" }}</div>
+    <div>Email : {{ jobInterview.email ?? "" }}</div>
+    <div>LinkedIn : {{ jobInterview.linkedIn ?? "" }}</div>
+    <p>Infos supplémentaires : {{ jobInterview.about }}</p>
+    
+    <a href="{{ url('app_job_interview') }}">Revenir à la liste</a>
+</div>
+{% endblock %}
