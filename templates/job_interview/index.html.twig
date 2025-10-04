@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste entretiens d'embauche{% endblock %}
+
+{% block body %}
+
+<div>
+    <h1>Liste entretiens d'embauche</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Poste recherché</th>
+                <th>Société</th>
+                <th>Type de candidature</th>
+                <th>Date</th>
+                <th>Numéro tél</th>
+                <th>Email</th>
+                <th>LinkedIn</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for jobInterview in jobInterviews %}
+                <tr>
+                    <td>{{ jobInterview.job }}</td>
+                    <td>{{ jobInterview.society }}</td>
+                    <td>{{ jobInterview.candidacyType }}</td>
+                    <td>{{ jobInterview.date | date("d/m/Y") }}</td>
+                    <td>{{ jobInterview.phoneNumber }}</td>
+                    <td>{{ jobInterview.email }}</td>
+                    <td>{{ jobInterview.linkedIn }}</td>
+                    <td>Voir Modifier Supprimer</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -21,8 +21,8 @@ class SocietyType extends AbstractType
             ->add("toRelaunchAt", DateType::class, ["label" => "À relancer le", "required" => false])
             ->add("relaunchedAt", DateType::class, ["label" => "Relancée le", "required" => false])
             ->add('phoneNumber', TextType::class, ["label" => "Numéro"])
-            ->add('email', TextType::class, ["label" => "Adresse email"])
-            ->add('linkedIn', TextType::class, ["label" => "Lien LinkedIn"])
+            ->add('email', TextType::class, ["label" => "Adresse email", "required" => false])
+            ->add('linkedIn', TextType::class, ["label" => "Lien LinkedIn", "required" => false])
             ->add('recruit', ChoiceType::class,
             [
                 "label" => "Recrute ?",
@@ -33,19 +33,37 @@ class SocietyType extends AbstractType
                     "Non" => "Non",
                     "Réponse vague" => "Réponse vague"
                 ],
-                "data" => "Pas encore contactée",
+                //"data" => "Pas encore contactée",
                 "expanded" => true,
                 "multiple" => false,
             ])
             ->add("about", TextareaType::class, ["label" => "Infos supplémentaires", "required" => false])
-            ->add("answer", TextareaType::class, ["label" => "Bilan de l'échange", "required" => false])
+            ->add("result", TextareaType::class, ["label" => "Bilan de l'échange", "required" => false])
         ;
+
+        if($options["edit"])
+        {
+            $builder->add('answer', ChoiceType::class,
+            [
+                "label" => "Réponse ?",
+                "choices" =>
+                [
+                    "Pas encore de réponse" => "Pas encore de réponse",
+                    "Entretien d'embauche" => "Entretien d'embauche",
+                    "Candidature rejetée" => "Candidature rejetée"
+                ],
+                "data" => "Pas encore de réponse",
+                "expanded" => true,
+                "multiple" => false,
+            ]);
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Society::class,
+            "edit" => false
         ]);
     }
 }

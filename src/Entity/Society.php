@@ -36,13 +36,16 @@ class Society
     private ?string $recruit = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $answer = null;
+    private ?string $result = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $Email = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $LinkedIn = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $answer = null;
 
     public function getId(): ?int
     {
@@ -133,14 +136,14 @@ class Society
         return $this;
     }
 
-    public function getAnswer(): ?string
+    public function getResult(): ?string
     {
-        return $this->answer;
+        return $this->result;
     }
 
-    public function setAnswer(?string $answer): static
+    public function setResult(?string $result): static
     {
-        $this->answer = $answer;
+        $this->result = $result;
 
         return $this;
     }
@@ -165,6 +168,18 @@ class Society
     public function setLinkedIn(?string $LinkedIn): static
     {
         $this->LinkedIn = $LinkedIn;
+
+        return $this;
+    }
+
+    public function getAnswer(): ?string
+    {
+        return $this->answer;
+    }
+
+    public function setAnswer(string $answer): static
+    {
+        $this->answer = $answer;
 
         return $this;
     }

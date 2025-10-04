@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un entretien d'embauche{% endblock %}
+
+{% block body %}
+
+<div>
+    <h1>Ajouter un entretien d'embauche</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.job) }}
+        {{ form_row(form.society) }}
+        {{ form_row(form.about) }}
+        {{ form_row(form.candidacyType) }}
+        {{ form_row(form.date) }}
+        {{ form_row(form.phoneNumber) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.linkedIn) }}
+
+        <input type="submit" />
+    {{ form_end(form) }}
+</div>
+{% endblock %}

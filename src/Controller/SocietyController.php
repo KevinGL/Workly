@@ -40,6 +40,8 @@ final class SocietyController extends AbstractController
 
         $society = new Society();
 
+        $society->setContactedAt(new \DateTime());
+
         $form = $this->createForm(SocietyType::class, $society);
         $form->handleRequest($req);
 
@@ -68,13 +70,19 @@ final class SocietyController extends AbstractController
 
         $society = $repo->find($id);
 
-        $form = $this->createForm(SocietyType::class, $society);
+        $form = $this->createForm(SocietyType::class, $society, ["edit" => true]);
         $form->handleRequest($req);
 
         if($form->isSubmitted() && $form->isValid())
         {
             $em->persist($society);
             $em->flush();
+
+            if($society->getAnswer() == "Entretien d'embauche")
+            {
+                $this->addFlash("success", "Société mise à jour, ajout d'un entretien d'embauche");
+                return $this->redirectToRoute("add_job_interview", ["societyID" => $society->getId()]);
+            }
 
             $this->addFlash("success", "Société mise à jour");
             return $this->redirectToRoute("app_society");

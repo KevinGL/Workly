@@ -26,7 +26,7 @@ class CandidacyType extends AbstractType
 
             if($options["show_advanced"])
             {
-                $builder->add('relaunchedAt', DateType::class, ["label" => "Relancée le"])
+                $builder->add('relaunchedAt', DateType::class, ["label" => "Relancée le", "required" => false])
                         ->add('answer', ChoiceType::class,
                         [
                             "label" => "Réponse ?",

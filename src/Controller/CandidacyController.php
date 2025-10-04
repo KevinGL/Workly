@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Candidacy;
+use App\Entity\JobInterview;
 use App\Form\CandidacyType;
+use App\Form\JobInterviewType;
 use App\Form\SeveralCandidaciesType;
 use App\Repository\CandidacyRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -115,6 +117,12 @@ final class CandidacyController extends AbstractController
         {
             $em->persist($candidacy);
             $em->flush();
+
+            if($candidacy->getAnswer() == "Entretien d'embauche")
+            {
+                $this->addFlash("success", "Candidature mise à jour, ajout entretien d'embauche");
+                return $this->redirectToRoute("add_job_interview", ["candidacyID" => $candidacy->getId()]);
+            }
 
             $this->addFlash("success", "Candidature mise à jour");
             return $this->redirectToRoute("app_candidacy");
