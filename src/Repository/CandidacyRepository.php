@@ -40,4 +40,19 @@ class CandidacyRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    public function findRelaunchesToday(): array
+    {
+        $tz = new \DateTimeZone('Europe/Paris');
+        $start = (new \DateTimeImmutable('today', $tz))->setTime(0, 0, 0);
+        $end = $start->modify('+1 day');
+
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.toRelaunchAt >= :start')
+            ->andWhere('s.toRelaunchAt < :end')
+            ->setParameter('start', $start)
+            ->setParameter('end', $end)
+            ->getQuery()
+            ->getResult();
+    }
 }
