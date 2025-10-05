@@ -120,33 +120,4 @@ final class JobInterviewController extends AbstractController
         $this->addFlash("success", "Entretien supprimé");
         return $this->redirectToRoute("app_job_interview");
     }
-
-    #[Route('/test-sendgrid')]
-    public function test(MailerInterface $mailer): Response
-    {
-        $email = (new Email())
-            ->from(new Address('gaykevin.gay448@gmail.com', 'Workly'))
-            ->to('kevinferrogl@gmail.com')
-            ->subject('Test SendGrid - Workly')
-            ->html('Le mail via SendGrid fonctionne !');
-
-        try
-        {
-            $mailer->send($email);
-            return new Response('✅ Mail envoyé (vérifie SendGrid Activity)');
-        }
-        catch (\Throwable $e)
-        {
-            return new Response('❌ Erreur lors de l\'envoi : ' . $e->getMessage());
-        }
-
-        return new Response('Mail envoyé via SendGrid ✅');
-    }
-
-    #[Route('/send-sms', name: 'app_send_sms')]
-    public function sendSms(SmsService $sms): Response
-    {
-        $sms->send('+33642427521', '📅 Rappel Workly : une relance est prévue aujourd\'hui !');
-        return new Response('SMS envoyé ✅');
-    }
 }

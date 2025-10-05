@@ -20,7 +20,7 @@ class SocietyType extends AbstractType
             ->add("contactedAt", DateType::class, ["label" => "Contactée le", "required" => false])
             ->add("toRelaunchAt", DateType::class, ["label" => "À relancer le", "required" => false])
             ->add("relaunchedAt", DateType::class, ["label" => "Relancée le", "required" => false])
-            ->add('phoneNumber', TextType::class, ["label" => "Numéro"])
+            ->add('phoneNumber', TextType::class, ["label" => "Numéro", "required" => false])
             ->add('email', TextType::class, ["label" => "Adresse email", "required" => false])
             ->add('linkedIn', TextType::class, ["label" => "Lien LinkedIn", "required" => false])
             ->add('recruit', ChoiceType::class,
@@ -31,7 +31,7 @@ class SocietyType extends AbstractType
                     "Pas encore contactée" => "Pas encore contactée",
                     "Oui" => "Oui",
                     "Non" => "Non",
-                    "Réponse vague" => "Réponse vague"
+                    "Autre" => "Autre"
                 ],
                 //"data" => "Pas encore contactée",
                 "expanded" => true,
