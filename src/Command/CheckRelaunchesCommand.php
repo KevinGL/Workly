@@ -70,7 +70,7 @@ class CheckRelaunchesCommand extends Command
             $message .= "- " . $rc->getSociety() . " (" . $rc->getLink() . ")\n";
         }
 
-        if(count($relaunchesSoc) > 0 || count($relaunchesCand))
+        if(count($relaunchesSoc) > 0 || count($relaunchesCand) > 0)
         {
             $this->smsService->send("+33642427521", $message);
 

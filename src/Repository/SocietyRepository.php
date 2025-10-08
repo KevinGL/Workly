@@ -50,6 +50,7 @@ class SocietyRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('s')
             ->andWhere('s.toRelaunchAt >= :start')
             ->andWhere('s.toRelaunchAt < :end')
+            ->andWhere("s.relaunchedAt IS NULL")
             ->setParameter('start', $start)
             ->setParameter('end', $end)
             ->getQuery()

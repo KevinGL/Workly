@@ -47,9 +47,10 @@ class CandidacyRepository extends ServiceEntityRepository
         $start = (new \DateTimeImmutable('today', $tz))->setTime(0, 0, 0);
         $end = $start->modify('+1 day');
 
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.toRelaunchAt >= :start')
-            ->andWhere('s.toRelaunchAt < :end')
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.toRelaunchAt >= :start')
+            ->andWhere('c.toRelaunchAt < :end')
+            ->andWhere("c.relaunchedAt IS NULL")
             ->setParameter('start', $start)
             ->setParameter('end', $end)
             ->getQuery()
