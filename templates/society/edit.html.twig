@@ -10,8 +10,14 @@
     {{ form_start(form) }}
         {{ form_row(form.name) }}
         {{ form_row(form.contactedAt) }}
-        {{ form_row(form.toRelaunchAt) }}
-        {{ form_row(form.relaunchedAt) }}
+        <div>
+            {{ form_row(form.toRelaunchAt) }}
+            <button type="button" id="setNullToRelaunchAt">Effacer</button>
+        
+        <div>
+            {{ form_row(form.relaunchedAt) }}
+            <button type="button" id="setNullRelaunchedAt">Effacer</button>
+        </div>
         {{ form_row(form.phoneNumber) }}
         {{ form_row(form.email) }}
         {{ form_row(form.linkedIn) }}
@@ -25,4 +31,16 @@
     
     <a href="{{ url('app_society') }}">Revenir à la liste</a>
 </div>
+
+<script>
+document.getElementById("setNullToRelaunchAt").addEventListener("click", () =>
+{
+    document.getElementById("society_toRelaunchAt").value = null;
+});
+
+document.getElementById("setNullRelaunchedAt").addEventListener("click", () =>
+{
+    document.getElementById("society_relaunchedAt").value = null;
+});
+</script>
 {% endblock %}

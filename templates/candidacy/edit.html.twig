@@ -11,9 +11,17 @@
         {{ form_row(form.society) }}
         {{ form_row(form.location) }}
         {{ form_row(form.about) }}
-        {{ form_row(form.appliedAt) }}
-        {{ form_row(form.toRelaunchAt) }}
-        {{ form_row(form.relaunchedAt) }}
+        <div>
+            {{ form_row(form.appliedAt) }}
+        </div>
+        <div>
+            {{ form_row(form.toRelaunchAt) }}
+            <button type="button" id="setNullToRelaunchAt">Effacer</button>
+        </div>
+        <div>
+            {{ form_row(form.relaunchedAt) }}
+            <button type="button" id="setNullRelaunchedAt">Effacer</button>
+        </div>
         {{ form_row(form.answer) }}
 
         <input type="submit" />
@@ -21,5 +29,17 @@
 
     <a href="{{ url('app_candidacy') }}">Revenir à la liste</a>
 </div>
+
+<script>
+document.getElementById("setNullToRelaunchAt").addEventListener("click", () =>
+{
+    document.getElementById("candidacy_toRelaunchAt").value = null;
+});
+
+document.getElementById("setNullRelaunchedAt").addEventListener("click", () =>
+{
+    document.getElementById("candidacy_relaunchedAt").value = null;
+});
+</script>
 
 {% endblock %}

@@ -22,7 +22,7 @@ class CandidacyType extends AbstractType
             ->add('location', TextType::class, ["label" => "Localisation"])
             ->add('about', TextareaType::class, ["label" => "Infos supplémentaires", "required" => false])
             ->add('appliedAt', DateType::class, ["label" => "Postulé le"])
-            ->add('toRelaunchAt', DateType::class, ["label" => "À relancer le"]);
+            ->add('toRelaunchAt', DateType::class, ["label" => "À relancer le", "required" => false]);
 
             if($options["show_advanced"])
             {

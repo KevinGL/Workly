@@ -32,7 +32,7 @@ class Candidacy
     #[ORM\Column]
     private ?\DateTime $appliedAt = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?\DateTime $toRelaunchAt = null;
 
     #[ORM\Column(nullable: true)]
@@ -123,7 +123,7 @@ class Candidacy
         return $this->toRelaunchAt;
     }
 
-    public function setToRelaunchAt(\DateTime $toRelaunchAt): static
+    public function setToRelaunchAt(?\DateTime $toRelaunchAt): static
     {
         $this->toRelaunchAt = $toRelaunchAt;
 
