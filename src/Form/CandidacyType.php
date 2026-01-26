@@ -34,7 +34,8 @@ class CandidacyType extends AbstractType
                             [
                                 "Pas encore de réponse" => "Pas encore de réponse",
                                 "Entretien d'embauche" => "Entretien d'embauche",
-                                "Candidature rejetée" => "Candidature rejetée"
+                                "Candidature rejetée" => "Candidature rejetée",
+                                "Offre clôturée" => "Offre clôturée"
                             ],
                             "data" => "Pas encore de réponse",
                             "expanded" => true,
