@@ -5,57 +5,79 @@
 {% block body %}
 
 <div>
-    <h1>Candidatures offres d'emploi</h1>
+    <h1 class="text-center text-4xl md:text-3xl font-semibold mb-12 pt-4">Candidatures offres d'emploi</h1>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Poste</th>
-                <th>Offre d'emploi</th>
-                <th>Société</th>
-                <th>Postulé le</th>
-                <th>À relancer le</th>
-                <th>Relancée le</th>
-                <th>Réponse</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            {% for cand in candidacies %}
+    <div class="overflow-x-auto md:overflow-visible">
+        <table class="w-full">
+            <thead class="bg-[#6f7cd6] text-white">
                 <tr>
-                    <td>{{ cand.job }}</td>
-                    <td>{{ cand.link }}</td>
-                    <td>{{ cand.society }}</td>
-                    <td>{{ cand.appliedAt ? cand.appliedAt | date("d/m/Y") : "N/A" }}</td>
-                    <td>{{ cand.toRelaunchAt ? cand.toRelaunchAt | date("d/m/Y") : "N/A" }}</td>
-                    <td>{{ cand.relaunchedAt ? cand.relaunchedAt | date("d/m/Y") : "N/A" }}</td>
-                    <td>{{ cand.answer ?? "N/A" }}</td>
-                    <td><a href="{{ url('view_candidacy', {'id': cand.id}) }}">Voir</a> <a href="{{ url('edit_candidacy', {'id': cand.id}) }}">Modifier</a> <button id="{{ cand.id }}" class="delete">Supprimer</button></td>
+                    <th class="py-5">Poste</th>
+                    <th>Offre d'emploi</th>
+                    <th>Société</th>
+                    <th>Postulé le</th>
+                    <th>À relancer le</th>
+                    <th>Relancée le</th>
+                    <th>Réponse</th>
+                    <th>Action</th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </thead>
 
-    <a href="{{ url('add_candidacy') }}">Ajouter une candidature</a>
-
-    <div>
-        <h4>Ajouter plusieurs candidatures</h4>
-
-        Nombre : <input type="number" min="2" id="number" value="2" />
-        <button id="add_several">Valider</button>
+            <tbody>
+                {% set i = 0 %}
+                {% for cand in candidacies %}
+                    <tr
+                        {% if i % 2 == 0%}
+                            class="bg-[#c7c6c8] text-gray-700"
+                        {% else %}
+                            class="bg-white text-gray-700"
+                        {% endif %}
+                    >
+                        <td class="py-5">{{ cand.job }}</td>
+                        <td>{{ cand.link }}</td>
+                        <td>{{ cand.society }}</td>
+                        <td>{{ cand.appliedAt ? cand.appliedAt | date("d/m/Y") : "N/A" }}</td>
+                        <td>{{ cand.toRelaunchAt ? cand.toRelaunchAt | date("d/m/Y") : "N/A" }}</td>
+                        <td>{{ cand.relaunchedAt ? cand.relaunchedAt | date("d/m/Y") : "N/A" }}</td>
+                        <td>{{ cand.answer ?? "N/A" }}</td>
+                        <td class="flex flex-wrap gap-2 justify-start">
+                            <a href="{{ url('view_candidacy', {'id': cand.id}) }}" class="bg-cyan-500 text-white p-2 m-2 rounded-lg">Voir</a>
+                            <a href="{{ url('edit_candidacy', {'id': cand.id}) }}" class="bg-yellow-500 text-white p-2 m-2 rounded-lg">Modifier</a>
+                            <button id="{{ cand.id }}" class="delete bg-red-500 text-white p-2 m-2 rounded-lg">Supprimer</button>
+                        </td>
+                    </tr>
+                    {% set i = i + 1 %}
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
+
+    <div class="text-center my-10 w-full">
+        <a class="bg-blue-500 p-5 rounded-lg text-white" href="{{ url('add_candidacy') }}">Ajouter une candidature</a>
+    </div>
+
+    <div class="bg-blue-500 text-center text-white w-4/5 md:w-1/5 mx-auto mb-5 rounded rounded-lg hover:cursor-pointer py-4" id="add_several">
+        <h4>Ajouter <input type="number" min="2" id="number" value="2" class="w-[30px] bg-blue-500"/> candidatures</h4>
+    </div>
+
+    <a href="{{ url('app_home') }}" class="block mt-5" >← Revenir au menu</a>
 </div>
 
-<div id="modal" hidden>
-    <div>Confirmer la suppression ?</div>
-    <div>
-        <button id="delete_yes">Oui</button>
-        <button id="delete_no">Non</button>
+<div id="modal" class="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-lg w-4/5 md:w-1/2 p-4">
+        <div>Confirmer la suppression ?</div>
+        <div class="flex flew-row justify-around mt-5">
+            <button id="delete_no" class="bg-cyan-500 text-white py-2 px-10 rounded-lg">Non</button>
+            <button id="delete_yes" class="bg-red-500 text-white py-2 px-10 rounded-lg">Oui</button>
+        </div>
     </div>
 </div>
 
 <script>
+    document.getElementById("number").addEventListener("click", (e) =>
+    {
+        e.stopPropagation();
+    });
+    
     document.getElementById("add_several").addEventListener("click", () =>
     {
         window.location.href = "/candidacy/add_several/" + document.getElementById("number").value;
@@ -70,7 +92,7 @@
         d.addEventListener("click", () =>
         {
             idDelete = d.id;
-            modal.hidden = false;
+            modal.classList.remove("hidden");
         });
     });
 
@@ -81,7 +103,7 @@
 
     document.getElementById("delete_no").addEventListener("click", () =>
     {
-        modal.hidden = true;
+        modal.classList.add("hidden");
     });
 </script>
 {% endblock %}

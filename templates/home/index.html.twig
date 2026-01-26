@@ -5,8 +5,35 @@
 {% block body %}
 
 <div>
-    <a href="{{ url('app_society') }}">Liste des sociétés</a>
-    <a href="{{ url('app_candidacy') }}">Liste des candidatures offres d'emploi</a>
-    <a href="{{ url('app_job_interview') }}">Liste des entretiens d'embauche</a>
+    <div class="bg-white w-4/5 rounded-2xl mx-auto mt-10 md:mt-60 flex flex-col text-center text-white">
+        <div id="society" class="bg-cyan-500 w-4/5 md:w-1/2 mx-auto rounded-full my-3 py-2 hover:cursor-pointer hover:bg-cyan-600">
+            Liste des sociétés
+        </div>
+
+        <div id="candidacy" class="bg-cyan-500 w-4/5 md:w-1/2 mx-auto rounded-full my-3 py-2 hover:cursor-pointer hover:bg-cyan-600">
+            Liste des candidatures
+        </div>
+
+        <div id="job_interview" class="bg-cyan-500 w-4/5 md:w-1/2 mx-auto rounded-full my-3 py-2 hover:cursor-pointer hover:bg-cyan-600">
+            Liste des entretiens d'embauche
+        </div>
+    </div>
 </div>
+
+<script>
+    document.getElementById("society").addEventListener("click", () =>
+    {
+        window.location = "/society";
+    });
+
+    document.getElementById("candidacy").addEventListener("click", () =>
+    {
+        window.location = "/candidacy";
+    });
+
+    document.getElementById("job_interview").addEventListener("click", () =>
+    {
+        window.location = "/job_interview";
+    });
+</script>
 {% endblock %}

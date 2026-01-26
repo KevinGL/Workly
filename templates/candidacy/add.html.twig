@@ -5,20 +5,24 @@
 {% block body %}
 
 <div>
-    {{ form_start(form) }}
-        {{ form_row(form.job) }}
-        {{ form_row(form.link) }}
-        {{ form_row(form.society) }}
-        {{ form_row(form.location) }}
-        {{ form_row(form.about) }}
-        {{ form_row(form.appliedAt) }}
-        {{ form_row(form.toRelaunchAt) }}
-        {{ form_row(form._token) }}
+    <h1 class="text-center text-4xl md:text-3xl font-semibold mb-12 pt-4">Ajouter une candidature</h1>
 
-        <input type="submit" />
-    {{ form_end(form, { 'render_rest': false }) }}
+    <div class="bg-white mx-auto md:w-1/2 w-4/5 p-4 rounded-xl">
+        {{ form_start(form) }}
+            {{ form_row(form.job, { row_attr: { class: "flex flex-col mb-8" }, attr: { class: "bg-gray-200 mt-2 rounded-lg h-8 px-2" } }) }}
+            {{ form_row(form.link, { row_attr: { class: "flex flex-col mb-8" }, attr: { class: "bg-gray-200 mt-2 rounded-lg h-8 px-2" } }) }}
+            {{ form_row(form.society, { row_attr: { class: "flex flex-col mb-8" }, attr: { class: "bg-gray-200 mt-2 rounded-lg h-8 px-2" } }) }}
+            {{ form_row(form.location, { row_attr: { class: "flex flex-col mb-8" }, attr: { class: "bg-gray-200 mt-2 rounded-lg h-8 px-2" } }) }}
+            {{ form_row(form.about, { row_attr: { class: "flex flex-col mb-8" }, attr: { class: "bg-gray-200 mt-2 rounded-lg h-20 px-2" } }) }}
+            {{ form_row(form.appliedAt, { row_attr: { class: "flex flex-col mb-8" }, attr: { class: "bg-gray-200 mt-2 rounded-lg h-8 px-2" } }) }}
+            {{ form_row(form.toRelaunchAt, { row_attr: { class: "flex flex-col mb-8" }, attr: { class: "bg-gray-200 mt-2 rounded-lg h-8 px-2" } }) }}
+            {{ form_row(form._token) }}
 
-    <a href="{{ url('app_candidacy') }}">Revenir à la liste</a>
+            <input type="submit" class="bg-blue-500 text-white p-3 rounded-lg hover:cursor-pointer w-full" />
+        {{ form_end(form, { 'render_rest': false }) }}
+
+        <a href="{{ url('app_candidacy') }}" class="block mt-5" >← Revenir à la liste</a>
+    </div>
 </div>
 
 {% endblock %}

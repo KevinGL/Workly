@@ -1,33 +1,35 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}AMettre à jour une candidature{% endblock %}
+{% block title %}Mettre à jour une candidature{% endblock %}
 
 {% block body %}
 
 <div>
-    {{ form_start(form) }}
-        {{ form_row(form.job) }}
-        {{ form_row(form.link) }}
-        {{ form_row(form.society) }}
-        {{ form_row(form.location) }}
-        {{ form_row(form.about) }}
-        <div>
-            {{ form_row(form.appliedAt) }}
-        </div>
-        <div>
-            {{ form_row(form.toRelaunchAt) }}
-            <button type="button" id="setNullToRelaunchAt">Effacer</button>
-        </div>
-        <div>
-            {{ form_row(form.relaunchedAt) }}
-            <button type="button" id="setNullRelaunchedAt">Effacer</button>
-        </div>
-        {{ form_row(form.answer) }}
+    <h1 class="text-center text-4xl md:text-3xl font-semibold mb-12 pt-4">Mettre à jour une candidature</h1>
 
-        <input type="submit" />
-    {{ form_end(form) }}
+    <div class="bg-white mx-auto md:w-1/2 w-4/5 p-4 rounded-xl">
+        {{ form_start(form) }}
+            {{ form_row(form.job, { row_attr: { class: "flex flex-col mb-8" }, attr: { class: "bg-gray-200 mt-2 rounded-lg h-8 px-2" } }) }}
+            {{ form_row(form.link, { row_attr: { class: "flex flex-col mb-8" }, attr: { class: "bg-gray-200 mt-2 rounded-lg h-8 px-2" } }) }}
+            {{ form_row(form.society, { row_attr: { class: "flex flex-col mb-8" }, attr: { class: "bg-gray-200 mt-2 rounded-lg h-8 px-2" } }) }}
+            {{ form_row(form.location, { row_attr: { class: "flex flex-col mb-8" }, attr: { class: "bg-gray-200 mt-2 rounded-lg h-8 px-2" } }) }}
+            {{ form_row(form.about, { row_attr: { class: "flex flex-col mb-8" }, attr: { class: "bg-gray-200 mt-2 rounded-lg h-20 px-2" } }) }}
+            {{ form_row(form.appliedAt, { row_attr: { class: "flex flex-col mb-8" }, attr: { class: "bg-gray-200 mt-2 rounded-lg h-8 px-2" } }) }}
+            <div class="mb-8">
+                {{ form_row(form.toRelaunchAt, { row_attr: { class: "flex flex-col" }, attr: { class: "bg-gray-200 mt-2 rounded-lg h-8 px-2" } }) }}
+                <button type="button" id="setNullToRelaunchAt" class="bg-red-500 text-white p-2 m-2 rounded-lg">Effacer</button>
+            </div>
+            <div class="mb-8">
+                {{ form_row(form.relaunchedAt, { row_attr: { class: "flex flex-col" }, attr: { class: "bg-gray-200 mt-2 rounded-lg h-8 px-2" } }) }}
+                <button type="button" id="setNullRelaunchedAt" class="bg-red-500 text-white p-2 m-2 rounded-lg">Effacer</button>
+            </div>
+            {{ form_row(form.answer, { row_attr: { class: "flex flex-col" } }) }}
 
-    <a href="{{ url('app_candidacy') }}">Revenir à la liste</a>
+            <input type="submit" class="bg-blue-500 text-white p-3 rounded-lg hover:cursor-pointer w-full mt-5" />
+        {{ form_end(form) }}
+
+        <a href="{{ url('app_candidacy') }}" class="block mt-5">← Revenir à la liste</a>
+    </div>
 </div>
 
 <script>

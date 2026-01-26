@@ -5,6 +5,13 @@
 {% block body %}
 
 <div>
-    {{ form(form) }}
+    <div class="bg-white mx-auto md:w-1/2 w-4/5 p-4 rounded-xl">
+        {{ form_start(form) }}
+            {{ form_row(form.password, { row_attr: { class: "flex flex-col mb-8" }, attr: { class: "bg-gray-200 mt-2 rounded-lg h-8 px-2" } }) }}
+            {{ form_row(form._token) }}
+
+            <input type="submit" value="Se connecter" class="bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 hover:cursor-pointer w-1/2 mx-auto block"/>
+        {{ form_end(form) }}
+    </div>
 </div>
 {% endblock %}
