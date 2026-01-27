@@ -32,14 +32,20 @@
                             class="bg-white text-gray-700"
                         {% endif %}
                     >
-                        <td class="py-5">{{ cand.job }}</td>
-                        <td>{{ cand.link }}</td>
-                        <td>{{ cand.society }}</td>
-                        <td>{{ cand.appliedAt ? cand.appliedAt | date("d/m/Y") : "N/A" }}</td>
-                        <td>{{ cand.toRelaunchAt ? cand.toRelaunchAt | date("d/m/Y") : "N/A" }}</td>
-                        <td>{{ cand.relaunchedAt ? cand.relaunchedAt | date("d/m/Y") : "N/A" }}</td>
-                        <td>{{ cand.answer ?? "N/A" }}</td>
-                        <td class="flex flex-wrap gap-2 justify-start">
+                        <td class="py-5 px-4">{{ cand.job }}</td>
+                        <td class="px-4">
+                            {% if cand.link != "" %}
+                                <a href="{{ cand.link }}" class="text-blue-600 underline hover:no-underline">Lien vers l'offre</a>
+                            {% else %}
+                                AUCUN LIEN
+                            {% endif %}
+                        </td>
+                        <td class="px-4">{{ cand.society }}</td>
+                        <td class="px-4">{{ cand.appliedAt ? cand.appliedAt | date("d/m/Y") : "N/A" }}</td>
+                        <td class="px-4">{{ cand.toRelaunchAt ? cand.toRelaunchAt | date("d/m/Y") : "N/A" }}</td>
+                        <td class="px-4">{{ cand.relaunchedAt ? cand.relaunchedAt | date("d/m/Y") : "N/A" }}</td>
+                        <td class="px-4">{{ cand.answer ?? "N/A" }}</td>
+                        <td class="flex flex-wrap gap-2 justify-start px-4">
                             <a href="{{ url('view_candidacy', {'id': cand.id}) }}" class="bg-cyan-500 text-white p-2 m-2 rounded-lg">Voir</a>
                             <a href="{{ url('edit_candidacy', {'id': cand.id}) }}" class="bg-yellow-500 text-white p-2 m-2 rounded-lg">Modifier</a>
                             <button id="{{ cand.id }}" class="delete bg-red-500 text-white p-2 m-2 rounded-lg">Supprimer</button>
